@@ -1,5 +1,5 @@
 const express = require('express')
-
+const morgan = require('morgan')
 //express app
 const app=express();
 
@@ -8,6 +8,25 @@ app.set('view engine','ejs')
 
 //listen for requests
 app.listen(3000);
+
+//morgan- third-party middleware
+app.use(morgan('dev'))
+// app.use(morgan('tiny'))
+// app.use(morgan('short'))
+// app.use(morgan('combined'))
+
+// app.use((req, res, next) => {
+//     console.log('new request made:');
+//     console.log('host: ', req.hostname);
+//     console.log('path: ', req.path);
+//     console.log('method: ', req.method);
+//     next(); // tells what to do next or proceed to the next func
+// });
+
+
+//middleware & static files
+app.use(express.static('public'))
+
 
 app.get('/', (req, res)=>{
     const blogs = [
